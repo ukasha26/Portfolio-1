@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Ukasha — Fullstack Developer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg:      '#08080f',
+          surface: '#0f0f1a',
+          card:    '#12121e',
+          border:  '#1c1c2e',
+          accent:  '#00ff88',
+          accent2: '#0099ff',
+          accent3: '#ff3366',
+          muted:   '#5a5a7a',
+          soft:    '#e8e8f0',
+        },
+        fontFamily: {
+          syne: ['Syne', 'sans-serif'],
+          mono: ['DM Mono', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  body { background:#08080f; color:#e8e8f0; cursor:none; }
+  #cur  { width:9px;height:9px;background:#00ff88;border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:transform .08s; }
+  #curR { width:34px;height:34px;border:1px solid rgba(0,255,136,.38);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998; }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0,255,136,.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,255,136,.022) 1px,transparent 1px);
+    background-size:55px 55px;
+  }
+  body::after {
+    content:'';position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    pointer-events:none;z-index:999;opacity:.3;
+  }
+  .clip-btn { clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%); }
+  .scroll-line { position:relative;overflow:hidden; }
+  .scroll-line::after { content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:#00ff88;animation:slide 2s ease-in-out infinite; }
+  @keyframes slide { to { left:100%; } }
+  .glow-pulse { animation:gp 4s ease-in-out infinite; }
+  @keyframes gp { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.8;} 50%{transform:translate(-50%,-50%) scale(1.15);opacity:.4;} }
+  .blink { animation:bl 2s ease-in-out infinite; }
+  @keyframes bl { 0%,100%{opacity:1;} 50%{opacity:.2;} }
+  .reveal { opacity:0;transform:translateY(36px);transition:opacity .65s ease,transform .65s ease; }
+  .reveal.on { opacity:1;transform:translateY(0); }
+  .asgn-badge { background:linear-gradient(135deg,rgba(0,255,136,.07),rgba(0,153,255,.07));border:1px solid rgba(0,255,136,.15); }
+  ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:#08080f;} ::-webkit-scrollbar-thumb{background:#00ff88;}
+  @media(max-width:768px){ body{cursor:auto;} #cur,#curR{display:none;} }
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-10 py-5 backdrop-blur-xl border-b border-border bg-bg/70">
+  <a href="#hero" class="font-syne font-extrabold text-accent tracking-tight text-lg">UK<span class="text-soft">ASHA</span></a>
+  <ul class="hidden md:flex gap-8 list-none">
+    <li><a href="#about"       class="font-mono text-[.7rem] text-muted hover:text-accent transition-colors uppercase tracking-widest">About</a></li>
+    <li><a href="#skills"      class="font-mono text-[.7rem] text-muted hover:text-accent transition-colors uppercase tracking-widest">Skills</a></li>
+    <li><a href="#projects"    class="font-mono text-[.7rem] text-muted hover:text-accent transition-colors uppercase tracking-widest">Projects</a></li>
+    <li><a href="#assignments" class="font-mono text-[.7rem] text-muted hover:text-accent transition-colors uppercase tracking-widest">Assignments</a></li>
+    <li><a href="#roadmap"     class="font-mono text-[.7rem] text-muted hover:text-accent transition-colors uppercase tracking-widest">Roadmap</a></li>
+    <li><a href="#contact"     class="font-mono text-[.7rem] text-muted hover:text-accent transition-colors uppercase tracking-widest">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="min-h-screen flex flex-col justify-center px-10 md:px-16 pt-28 pb-16 relative overflow-hidden grid-bg">
+  <div class="absolute w-[550px] h-[550px] rounded-full top-1/2 left-1/2 glow-pulse pointer-events-none"
+       style="background:radial-gradient(circle,rgba(0,255,136,.08) 0%,transparent 70%);"></div>
+  <div class="hidden md:flex absolute top-32 right-16 items-center gap-3 bg-card border border-border px-5 py-3 font-mono text-xs text-muted">
+    <span class="w-2 h-2 rounded-full bg-accent blink inline-block"></span>
+    Currently Learning React &amp; PHP
+  </div>
+  <p class="font-mono text-xs text-accent tracking-[.18em] uppercase mb-6 flex items-center gap-3 reveal">
+    <span class="w-10 h-px bg-accent inline-block"></span>Available for Internships &amp; Projects
+  </p>
+  <h1 class="font-syne font-extrabold leading-[.88] tracking-[-0.04em] mb-5 reveal" style="font-size:clamp(3.2rem,10vw,8.5rem);animation-delay:.08s">
+    Muhammad<br>
+    <span class="text-transparent" style="-webkit-text-stroke:1px rgba(232,232,240,.22)">Uk<span style="-webkit-text-stroke:0;color:#00ff88">asha</span></span>
+  </h1>
+  <p class="font-mono text-muted mb-12 reveal" style="font-size:clamp(.82rem,1.6vw,1rem);animation-delay:.16s">
+    Fullstack Developer in Progress &nbsp;·&nbsp; <span class="text-accent2">BSIT Student</span> &nbsp;·&nbsp; Future Cybersecurity Specialist
+  </p>
+  <div class="flex gap-4 flex-wrap reveal" style="animation-delay:.24s">
+    <a href="#projects"    class="clip-btn bg-accent text-black font-bold text-sm px-8 py-3.5 tracking-wide hover:bg-[#00cc6a] hover:shadow-[0_0_28px_rgba(0,255,136,.35)] transition-all">View Projects</a>
+    <a href="#assignments" class="border border-border text-soft text-sm px-8 py-3.5 tracking-wide hover:border-accent hover:text-accent transition-all">50+ Assignments</a>
+    <a href="#contact"     class="border border-border text-soft text-sm px-8 py-3.5 tracking-wide hover:border-accent2 hover:text-accent2 transition-all">Contact Me</a>
+  </div>
+  <div class="absolute bottom-10 left-10 font-mono text-[.63rem] text-muted flex items-center gap-3 reveal" style="animation-delay:.35s">
+    <span class="w-14 h-px bg-muted inline-block scroll-line"></span>SCROLL TO EXPLORE
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="py-24 px-10 md:px-16 bg-surface">
+  <div class="flex items-center gap-5 mb-14 reveal">
+    <span class="font-mono text-xs text-accent">01 /</span>
+    <h2 class="font-syne font-extrabold tracking-tight" style="font-size:clamp(1.8rem,4vw,2.8rem)">About Me</h2>
+    <div class="flex-1 h-px bg-border"></div>
+  </div>
+  <div class="grid md:grid-cols-2 gap-16 items-center">
+    <div class="space-y-5 reveal">
+      <p class="text-muted leading-relaxed text-[1rem]">
+        I'm <strong class="text-soft">Muhammad Ukasha</strong>, a <span class="text-accent font-mono text-sm">BSIT student</span> from Pakistan building my career in fullstack web development. Started from zero — HTML, CSS, JavaScript — and have been stacking skills ever since.
+      </p>
+      <p class="text-muted leading-relaxed text-[1rem]">
+        I've completed <strong class="text-soft">50+ hands-on assignments</strong> across HTML, CSS, JavaScript, SQL, Tailwind and more. My biggest project so far is a full-stack <strong class="text-soft">Meezan Bank system</strong> — PHP backend + MySQL, fully synced with the frontend.
+      </p>
+      <p class="text-muted leading-relaxed text-[1rem]">
+        Long-term goal? <span class="text-accent font-mono text-sm">Cybersecurity</span>. Web dev is my foundation — you can't defend systems you don't understand how to build.
+      </p>
+    </div>
+    <div class="grid grid-cols-2 gap-0.5 reveal">
+      <div class="bg-card border border-border p-7 hover:border-accent transition-colors group">
+        <div class="font-syne font-extrabold text-accent text-4xl mb-1 group-hover:scale-105 transition-transform origin-left">50+</div>
+        <div class="font-mono text-[.65rem] text-muted uppercase tracking-widest">Assignments Done</div>
+      </div>
+      <div class="bg-card border border-border p-7 hover:border-accent transition-colors group">
+        <div class="font-syne font-extrabold text-accent text-4xl mb-1 group-hover:scale-105 transition-transform origin-left">3+</div>
+        <div class="font-mono text-[.65rem] text-muted uppercase tracking-widest">Projects Built</div>
+      </div>
+      <div class="bg-card border border-border p-7 hover:border-accent transition-colors group">
+        <div class="font-syne font-extrabold text-accent text-4xl mb-1 group-hover:scale-105 transition-transform origin-left">7+</div>
+        <div class="font-mono text-[.65rem] text-muted uppercase tracking-widest">Technologies</div>
+      </div>
+      <div class="bg-card border border-border p-7 hover:border-accent transition-colors group">
+        <div class="font-syne font-extrabold text-accent text-4xl mb-1 group-hover:scale-105 transition-transform origin-left">∞</div>
+        <div class="font-mono text-[.65rem] text-muted uppercase tracking-widest">Learning Streak</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="py-24 px-10 md:px-16 bg-bg">
+  <div class="flex items-center gap-5 mb-14 reveal">
+    <span class="font-mono text-xs text-accent">02 /</span>
+    <h2 class="font-syne font-extrabold tracking-tight" style="font-size:clamp(1.8rem,4vw,2.8rem)">Tech Stack</h2>
+    <div class="flex-1 h-px bg-border"></div>
+  </div>
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-0.5 mb-4">
+
+    <!-- Frontend -->
+    <div class="bg-card border border-border p-8 relative overflow-hidden group hover:border-accent/30 transition-colors reveal">
+      <div class="absolute top-0 left-0 w-0.5 h-0 bg-accent group-hover:h-full transition-all duration-300"></div>
+      <div class="text-2xl mb-4">🎨</div>
+      <div class="font-syne font-bold text-sm mb-5 text-soft">Frontend</div>
+      <div class="flex flex-wrap gap-2">
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-all cursor-default">HTML5</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-all cursor-default">CSS3</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-all cursor-default">JavaScript</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-all cursor-default">jQuery</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent2/30 text-accent2 cursor-default">React ↗</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent2/30 text-accent2 cursor-default">Tailwind ↗</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-muted/20 text-muted/50 cursor-default">Bootstrap ~</span>
+      </div>
+    </div>
+
+    <!-- Backend -->
+    <div class="bg-card border border-border p-8 relative overflow-hidden group hover:border-accent/30 transition-colors reveal">
+      <div class="absolute top-0 left-0 w-0.5 h-0 bg-accent group-hover:h-full transition-all duration-300"></div>
+      <div class="text-2xl mb-4">⚙️</div>
+      <div class="font-syne font-bold text-sm mb-5 text-soft">Backend</div>
+      <div class="flex flex-wrap gap-2">
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent2/30 text-accent2 cursor-default">PHP ↗</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent3/30 text-accent3 cursor-default">Laravel →</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent3/30 text-accent3 cursor-default">Next.js →</span>
+      </div>
+    </div>
+
+    <!-- Database -->
+    <div class="bg-card border border-border p-8 relative overflow-hidden group hover:border-accent/30 transition-colors reveal">
+      <div class="absolute top-0 left-0 w-0.5 h-0 bg-accent group-hover:h-full transition-all duration-300"></div>
+      <div class="text-2xl mb-4">🗄️</div>
+      <div class="font-syne font-bold text-sm mb-5 text-soft">Databases</div>
+      <div class="flex flex-wrap gap-2">
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-all cursor-default">MySQL</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-all cursor-default">PostgreSQL</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-border text-muted hover:border-accent hover:text-accent transition-all cursor-default">XAMPP</span>
+      </div>
+    </div>
+
+    <!-- Interests -->
+    <div class="bg-card border border-border p-8 relative overflow-hidden group hover:border-accent/30 transition-colors reveal">
+      <div class="absolute top-0 left-0 w-0.5 h-0 bg-accent group-hover:h-full transition-all duration-300"></div>
+      <div class="text-2xl mb-4">🔐</div>
+      <div class="font-syne font-bold text-sm mb-5 text-soft">Future Goals</div>
+      <div class="flex flex-wrap gap-2">
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent3/30 text-accent3 cursor-default">Cybersecurity →</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent3/30 text-accent3 cursor-default">Ethical Hacking →</span>
+        <span class="font-mono text-[.65rem] px-3 py-1 bg-surface border border-accent3/30 text-accent3 cursor-default">Networking →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="flex gap-6 flex-wrap bg-card border border-border px-5 py-3.5 font-mono text-[.65rem] text-muted reveal">
+    <span>⬜ Learned</span>
+    <span class="text-accent2">↗ Currently Learning</span>
+    <span class="text-muted/50">~ Explored / Touched</span>
+    <span class="text-accent3">→ Coming Soon</span>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-24 px-10 md:px-16 bg-surface">
+  <div class="flex items-center gap-5 mb-6 reveal">
+    <span class="font-mono text-xs text-accent">03 /</span>
+    <h2 class="font-syne font-extrabold tracking-tight" style="font-size:clamp(1.8rem,4vw,2.8rem)">Projects</h2>
+    <div class="flex-1 h-px bg-border"></div>
+  </div>
+ 
+
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-0.5">
+
+    <!-- PROJECT 001 -->
+    <div class="bg-card border border-border p-9 hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,.5)] transition-all duration-300 reveal group relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      <div class="font-mono text-[.62rem] text-accent tracking-widest mb-4">PROJECT / 001</div>
+      <h3 class="font-syne font-bold text-xl tracking-tight mb-3">Meezan Bank System</h3>
+      <p class="text-muted text-sm leading-relaxed mb-6">Full-stack banking web application. PHP backend connected to MySQL — account management and transaction flow, frontend to database, end-to-end.</p>
+      <div class="flex flex-wrap gap-1.5 mb-7">
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">PHP</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">MySQL</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">HTML/CSS</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">JavaScript</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">XAMPP</span>
+      </div>
+      <div class="flex gap-5">
+        <a href="https://github.com/ukasha26/Meezan-Bank-App" class="font-mono text-xs text-muted hover:text-accent border-b border-border hover:border-accent pb-0.5 transition-all">↗ GitHub</a>
+        <a href="#" class="font-mono text-xs text-muted hover:text-accent border-b border-border hover:border-accent pb-0.5 transition-all">⬡ Live Demo</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 002 — JS/HTML/CSS -->
+    <div class="bg-card border border-border p-9 hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,.5)] transition-all duration-300 reveal group relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      <div class="font-mono text-[.62rem] text-accent tracking-widest mb-4">PROJECT / 002</div>
+      <!-- ✏️ Replace with your JS/HTML project name -->
+      <h3 class="font-syne font-bold text-xl tracking-tight mb-3">Your JS / HTML Project</h3>
+      <!-- ✏️ Replace with your description -->
+      <p class="text-muted text-sm leading-relaxed mb-6">Add your project description here — what it does, what problem it solves, what you learned.</p>
+      <div class="flex flex-wrap gap-1.5 mb-7">
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">HTML</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">CSS</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">JavaScript</span>
+      </div>
+      <div class="flex gap-5">
+        <!-- ✏️ Replace # with your GitHub link -->
+        <a href="https://github.com/ukasha26/js-03" class="font-mono text-xs text-muted hover:text-accent border-b border-border hover:border-accent pb-0.5 transition-all">↗ GitHub</a>
+        <a href="https://ukasha26.github.io/js-03/" class="font-mono text-xs text-muted hover:text-accent border-b border-border hover:border-accent pb-0.5 transition-all">⬡ Live Demo</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 003 — React -->
+    <div class="bg-card border border-border p-9 hover:border-accent/40 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,.5)] transition-all duration-300 reveal group relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent/3 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      <div class="font-mono text-[.62rem] text-accent tracking-widest mb-4">PROJECT / 003</div>
+      <!-- ✏️ Replace with your React project name -->
+      <h3 class="font-syne font-bold text-xl tracking-tight mb-3">Your React Project</h3>
+      <!-- ✏️ Replace with your description -->
+      <p class="text-muted text-sm leading-relaxed mb-6">Add your React project description here — key features and what you built.</p>
+      <div class="flex flex-wrap gap-1.5 mb-7">
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">React</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">JavaScript</span>
+        <span class="font-mono text-[.62rem] px-2.5 py-1 bg-accent/5 border border-accent/20 text-accent">Tailwind</span>
+      </div>
+      <div class="flex gap-5">
+        <a href="https://github.com/ukasha26/Live-Rate-Demo" class="font-mono text-xs text-muted hover:text-accent border-b border-border hover:border-accent pb-0.5 transition-all">↗ GitHub</a>
+        <a href="#" class="font-mono text-xs text-muted hover:text-accent border-b border-border hover:border-accent pb-0.5 transition-all">⬡ Live Demo</a>
+      </div>
+    </div>
+
+  </div>
+  <p class="font-mono text-[.65rem] text-muted mt-3 text-center reveal">Duplicate any card above to add more projects as you build them →</p>
+</section>
+
+<!-- ASSIGNMENTS -->
+<section id="assignments" class="py-24 px-10 md:px-16 bg-bg">
+  <div class="flex items-center gap-5 mb-6 reveal">
+    <span class="font-mono text-xs text-accent">04 /</span>
+    <h2 class="font-syne font-extrabold tracking-tight" style="font-size:clamp(1.8rem,4vw,2.8rem)">Assignments</h2>
+    <div class="flex-1 h-px bg-border"></div>
+  </div>
+  <p class="text-muted text-sm leading-relaxed mb-10 max-w-2xl reveal">
+    50+ hands-on assignments completed as part of my BSIT coursework and self-study — covering everything from basic HTML structure to multi-table SQL queries. Every one is a real working file.
+  </p>
+
+  <!-- Filter tabs -->
+  <div class="flex flex-wrap gap-2 mb-8 reveal">
+    <button onclick="filterAsgn('all',this)"   class="filter-btn font-mono text-xs px-4 py-2 border border-accent text-accent bg-accent/10 transition-all">All (50+)</button>
+    <button onclick="filterAsgn('html',this)"  class="filter-btn font-mono text-xs px-4 py-2 border border-border text-muted hover:border-accent hover:text-accent transition-all">HTML / CSS</button>
+    <button onclick="filterAsgn('js',this)"    class="filter-btn font-mono text-xs px-4 py-2 border border-border text-muted hover:border-accent hover:text-accent transition-all">JavaScript</button>
+    <button onclick="filterAsgn('sql',this)"   class="filter-btn font-mono text-xs px-4 py-2 border border-border text-muted hover:border-accent hover:text-accent transition-all">SQL / Database</button>
+    <button onclick="filterAsgn('tw',this)"    class="filter-btn font-mono text-xs px-4 py-2 border border-border text-muted hover:border-accent hover:text-accent transition-all">Tailwind</button>
+    <button onclick="filterAsgn('php',this)"   class="filter-btn font-mono text-xs px-4 py-2 border border-border text-muted hover:border-accent hover:text-accent transition-all">PHP</button>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-0.5" id="asgn-grid">
+
+    <!-- ═══ HTML / CSS ═══ -->
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="html">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#01</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">HTML/CSS</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">Lahore Digital Gate</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">HTML structure, semantic tags, inline &amp; external CSS.</p>
+      <a href="https://github.com/ukasha26/The-third-gate" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="html">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#02</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">HTML/CSS</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">CV</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Flexbox navigation with hover states and mobile layout.</p>
+      <a href="https://github.com/ukasha26/Assign-01" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="html">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#03</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">HTML/CSS</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">CSS Grid Layout</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Magazine-style layout using CSS Grid with nested columns.</p>
+      <a href="https://github.com/ukasha26/02" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="html">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#04</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">HTML/CSS</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">HTML Forms &amp; Styling</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Login, signup and contact forms with CSS-only validation.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="html">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#05</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">HTML/CSS</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">CSS Animations</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Keyframe animations, hover transitions, loading spinner.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="html">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#06</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">HTML/CSS</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">Flexbox Practice</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Card layouts, centering tricks, flex-grow/shrink exercises.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <!-- ═══ JAVASCRIPT ═══ -->
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="js">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#07</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">JavaScript</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">DOM Manipulation</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Selecting, creating and updating DOM elements dynamically.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="js">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#08</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">JavaScript</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">Calculator App</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Functional calculator with event listeners and JS logic.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="js">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#09</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">JavaScript</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">To-Do List App</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Add, delete, complete — local state management with JS.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="js">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#10</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">JavaScript</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">Fetch API Practice</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Calling a public REST API and rendering JSON on the page.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="js">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#11</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">JavaScript</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">Form Validation (JS)</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Client-side validation with regex, error messages, UX feedback.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="js">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#12</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">JavaScript</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">localStorage Quiz App</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Quiz with score tracking persisted in localStorage.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <!-- ═══ SQL ═══ -->
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="sql">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent3">#13</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">SQL</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">CREATE &amp; INSERT</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Designed a student records table from scratch in MySQL.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="sql">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent3">#14</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">SQL</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">SELECT &amp; WHERE</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Filtering, sorting, and searching records with conditions.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="sql">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent3">#15</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">SQL</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">JOIN Queries</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">INNER, LEFT, RIGHT JOIN across multiple related tables.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="sql">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent3">#16</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">PostgreSQL</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">PostgreSQL CRUD</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Setup PostgreSQL, basic CRUD on a custom database.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <!-- ═══ TAILWIND ═══ -->
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="tw">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#17</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">Tailwind</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">Tailwind Landing Page</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Responsive landing page built with Tailwind utility classes only.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="tw">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent">#18</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">Tailwind</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">Tailwind Card Components</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Reusable card, badge, and button components in Tailwind.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <!-- ═══ PHP ═══ -->
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="php">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#19</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">PHP</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">PHP Form Handler</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Processing HTML form data server-side with PHP validation.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <div class="asgn-card bg-card border border-border p-6 hover:border-accent/40 transition-all group reveal" data-cat="php">
+      <div class="flex items-start justify-between mb-3">
+        <span class="asgn-badge font-mono text-[.6rem] px-2.5 py-1 text-accent2">#20</span>
+        <span class="font-mono text-[.58rem] text-muted uppercase tracking-widest">PHP</span>
+      </div>
+      <h4 class="font-syne font-bold text-sm mb-2 group-hover:text-accent transition-colors">PHP + MySQL CRUD</h4>
+      <p class="text-muted text-xs leading-relaxed mb-4">Full Create, Read, Update, Delete with PHP and MySQL.</p>
+      <a href="#" class="font-mono text-[.62rem] text-muted hover:text-accent transition-colors">View →</a>
+    </div>
+
+    <!-- ── ADD MORE ── -->
+    <!-- To add an assignment: copy any card block above, update #number, title, description, data-cat (html/js/sql/tw/php), and href -->
+
+    <!-- Placeholder -->
+    <div class="bg-card border border-dashed border-border p-6 flex flex-col items-center justify-center text-center min-h-[180px] reveal">
+      <div class="font-mono text-xs text-muted mb-2">+ 30 More Assignments</div>
+      <div class="font-mono text-[.62rem] text-muted/40 leading-relaxed">Copy any card above and paste your real assignments here.<br>Change the title, desc, data-cat and href link.</div>
+    </div>
+
+  </div>
+
+  <div class="mt-6 reveal">
+    <div class="inline-flex items-center gap-3 font-mono text-xs text-muted bg-card border border-border px-5 py-3">
+      Showing <span id="asgn-count" class="text-accent font-bold mx-1">20</span> of 50+ assignments
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="py-24 px-10 md:px-16 bg-surface">
+  <div class="flex items-center gap-5 mb-14 reveal">
+    <span class="font-mono text-xs text-accent">05 /</span>
+    <h2 class="font-syne font-extrabold tracking-tight" style="font-size:clamp(1.8rem,4vw,2.8rem)">My Roadmap</h2>
+    <div class="flex-1 h-px bg-border"></div>
+  </div>
+  <div class="grid md:grid-cols-3 gap-0.5">
+    <div class="bg-card border border-border p-8 reveal">
+      <div class="font-mono text-[.62rem] text-accent tracking-widest mb-3">PHASE 01 — DONE ✓</div>
+      <div class="font-syne font-bold text-lg mb-5">Foundations</div>
+      <ul class="space-y-0">
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent">✓</span>HTML &amp; CSS</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent">✓</span>JavaScript Concepts</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent">✓</span>jQuery Basics</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent">✓</span>Tailwind CSS</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent">✓</span>MySQL &amp; PostgreSQL</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5"><span class="text-accent">✓</span>50+ Assignments</li>
+      </ul>
+    </div>
+    <div class="bg-card border border-accent/25 p-8 reveal relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-bl-full pointer-events-none"></div>
+      <div class="font-mono text-[.62rem] text-accent2 tracking-widest mb-3">PHASE 02 — NOW ◉</div>
+      <div class="font-syne font-bold text-lg mb-5">Going Deeper</div>
+      <ul class="space-y-0">
+        <li class="font-mono text-xs text-accent2 flex items-center gap-3 py-2.5 border-b border-border"><span>◉</span>React.js</li>
+        <li class="font-mono text-xs text-accent2 flex items-center gap-3 py-2.5 border-b border-border"><span>◉</span>PHP Development</li>
+        <li class="font-mono text-xs text-muted  flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent3">→</span>Laravel Framework</li>
+        <li class="font-mono text-xs text-muted  flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent3">→</span>Next.js</li>
+        <li class="font-mono text-xs text-muted  flex items-center gap-3 py-2.5"><span class="text-accent3">→</span>REST API Design</li>
+      </ul>
+    </div>
+    <div class="bg-card border border-border p-8 reveal">
+      <div class="font-mono text-[.62rem] text-accent3 tracking-widest mb-3">PHASE 03 — FUTURE ⬡</div>
+      <div class="font-syne font-bold text-lg mb-5">Cybersecurity</div>
+      <ul class="space-y-0">
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent3">→</span>Network Security</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent3">→</span>Web App Pentesting</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent3">→</span>Ethical Hacking</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5 border-b border-border"><span class="text-accent3">→</span>CTF Challenges</li>
+        <li class="font-mono text-xs text-muted flex items-center gap-3 py-2.5"><span class="text-accent3">→</span>Security Certifications</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-24 px-10 md:px-16 bg-bg">
+  <div class="flex items-center gap-5 mb-14 reveal">
+    <span class="font-mono text-xs text-accent">06 /</span>
+    <h2 class="font-syne font-extrabold tracking-tight" style="font-size:clamp(1.8rem,4vw,2.8rem)">Contact</h2>
+    <div class="flex-1 h-px bg-border"></div>
+  </div>
+  <div class="grid md:grid-cols-2 gap-16 items-start">
+    <div class="reveal">
+      <h3 class="font-syne font-extrabold leading-[.92] tracking-[-0.04em] mb-6" style="font-size:clamp(2rem,5vw,3.8rem)">
+        Let's Build<br><span class="text-accent">Something</span><br>Together.
+      </h3>
+      <p class="text-muted leading-relaxed mb-8 max-w-sm text-sm">Open to internships, collaborations, freelance, and learning opportunities. Always happy to talk tech.</p>
+      <div class="flex flex-col gap-0.5">
+        <!-- ✏️ Replace with your GitHub URL -->
+        <a href="https://github.com/" target="_blank" class="flex items-center justify-between px-6 py-5 bg-card border border-border hover:border-accent hover:translate-x-1 transition-all text-soft hover:text-accent group">
+          <span class="font-mono text-sm">⌥ GitHub</span><span class="text-muted group-hover:text-accent">→</span>
+        </a>
+        <!-- ✏️ Replace with your LinkedIn URL -->
+        <a href="https://linkedin.com/" target="_blank" class="flex items-center justify-between px-6 py-5 bg-card border border-border hover:border-accent hover:translate-x-1 transition-all text-soft hover:text-accent group">
+          <span class="font-mono text-sm">⊞ LinkedIn</span><span class="text-muted group-hover:text-accent">→</span>
+        </a>
+        <!-- ✏️ Replace with your email -->
+        <a href="mailto:ukasha@email.com" class="flex items-center justify-between px-6 py-5 bg-card border border-border hover:border-accent hover:translate-x-1 transition-all text-soft hover:text-accent group">
+          <span class="font-mono text-sm">✉ Email Me</span><span class="text-muted group-hover:text-accent">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="bg-card border border-border p-10 reveal">
+      <h4 class="font-syne font-bold text-lg mb-6">Quick Info</h4>
+      <div class="flex flex-col gap-0.5">
+        <div class="flex items-center gap-4 bg-surface border border-border px-5 py-4">
+          <span class="font-mono text-[.62rem] text-muted uppercase tracking-widest w-20 shrink-0">Name</span>
+          <span class="font-mono text-sm text-soft">Muhammad Ukasha</span>
+        </div>
+        <div class="flex items-center gap-4 bg-surface border border-border px-5 py-4">
+          <span class="font-mono text-[.62rem] text-muted uppercase tracking-widest w-20 shrink-0">Degree</span>
+          <span class="font-mono text-sm text-soft">BSIT (In Progress)</span>
+        </div>
+        <div class="flex items-center gap-4 bg-surface border border-border px-5 py-4">
+          <span class="font-mono text-[.62rem] text-muted uppercase tracking-widest w-20 shrink-0">Focus</span>
+          <span class="font-mono text-sm text-soft">Fullstack Web Dev</span>
+        </div>
+        <div class="flex items-center gap-4 bg-surface border border-border px-5 py-4">
+          <span class="font-mono text-[.62rem] text-muted uppercase tracking-widest w-20 shrink-0">Goal</span>
+          <span class="font-mono text-sm text-soft">Cybersecurity Specialist</span>
+        </div>
+        <div class="flex items-center gap-4 bg-surface border border-border px-5 py-4">
+          <span class="font-mono text-[.62rem] text-muted uppercase tracking-widest w-20 shrink-0">Status</span>
+          <span class="font-mono text-sm text-accent flex items-center gap-2"><span class="w-1.5 h-1.5 bg-accent rounded-full blink inline-block"></span>Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="flex flex-col md:flex-row justify-between items-center px-10 md:px-16 py-8 border-t border-border font-mono text-[.65rem] text-muted gap-3">
+  <span>© 2025 Muhammad Ukasha — Built with HTML, Tailwind CSS &amp; JavaScript</span>
+  <span>Designed to impress. Built to learn.</span>
+</footer>
+
+<script>
+  // Cursor
+  const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.transform=`translate(${mx-4.5}px,${my-4.5}px)`;});
+  (function raf(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;curR.style.transform=`translate(${rx-17}px,${ry-17}px)`;requestAnimationFrame(raf);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cur.style.transform+=' scale(2.2)';curR.style.borderColor='#00ff88';});
+    el.addEventListener('mouseleave',()=>{curR.style.borderColor='rgba(0,255,136,.38)';});
+  });
+
+  // Scroll reveal
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);obs.unobserve(e.target);}});},{threshold:.07});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  // Active nav
+  const secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('nav a');
+  window.addEventListener('scroll',()=>{
+    let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-110)c=s.id;});
+    navAs.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+c?'#00ff88':'';});
+  });
+
+  // Assignment filter
+  function filterAsgn(cat,btn){
+    document.querySelectorAll('.filter-btn').forEach(b=>{
+      b.classList.remove('border-accent','text-accent','bg-accent/10');
+      b.classList.add('border-border','text-muted');
+    });
+    btn.classList.add('border-accent','text-accent','bg-accent/10');
+    btn.classList.remove('border-border','text-muted');
+    const cards=document.querySelectorAll('.asgn-card');
+    let v=0;
+    cards.forEach(c=>{const show=cat==='all'||c.dataset.cat===cat;c.style.display=show?'':'none';if(show)v++;});
+    document.getElementById('asgn-count').textContent=v;
+  }
+</script>
+</body>
+</html>
