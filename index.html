@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ukasha | Full-Stack & Cyber Enthusiast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .project-card:hover { transform: translateY(-10px); border-color: #00d4ff; }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-slate-200 overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-[#00d4ff] tracking-tighter">UKASHA<span class="text-white">.</span></div>
+            
+            <ul class="hidden md:flex space-x-8 font-medium">
+                <li><a href="#about" class="hover:text-[#00d4ff] transition">About</a></li>
+                <li><a href="#projects" class="hover:text-[#00d4ff] transition">Projects</a></li>
+                <li><a href="#assignments" class="hover:text-[#00d4ff] transition">Assignments</a></li>
+                <li><a href="#contact" class="hover:text-[#00d4ff] transition">Contact</a></li>
+            </ul>
+
+            <button id="menu-btn" class="md:hidden text-2xl text-[#00d4ff]">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-[#1e293b] p-6 space-y-4 text-center">
+            <a href="#about" class="block hover:text-[#00d4ff]">About</a>
+            <a href="#projects" class="block hover:text-[#00d4ff]">Projects</a>
+            <a href="#assignments" class="block hover:text-[#00d4ff]">Assignments</a>
+            <a href="#contact" class="block hover:text-[#00d4ff]">Contact</a>
+        </div>
+    </nav>
+
+    <section class="min-height-[90vh] pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between">
+        <div class="md:w-3/5 space-y-6 text-center md:text-left">
+            <h5 class="text-[#00d4ff] font-mono tracking-widest uppercase">Building secure digital experiences</h5>
+            <h1 class="text-5xl md:text-7xl font-bold text-white leading-tight">Hi, I'm <span class="text-[#00d4ff]">Muhammad Ukasha</span></h1>
+            <p class="text-lg text-slate-400 max-w-xl">A passionate Full-Stack Developer currently pursuing BSIT. I specialize in creating functional web apps while keeping an eye on Cybersecurity to build the future of secure tech.</p>
+            <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                <a href="#projects" class="bg-[#00d4ff] text-[#0f172a] px-8 py-3 rounded-full font-bold hover:scale-105 transition">Explore Work</a>
+                <a href="#contact" class="border border-slate-600 px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition">Let's Talk</a>
+            </div>
+        </div>
+        <div class="md:w-1/3 mt-12 md:mt-0 relative group">
+            <div class="absolute -inset-1 bg-[#00d4ff] rounded-full blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+            <img src="img.jpeg" alt="Ukasha" class="relative rounded-full w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-[#1e293b]">
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-[#131c2f]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">About <span class="text-[#00d4ff]">Me</span></h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-4 text-slate-300">
+                    <p>I am a BSIT student who started his journey with a curiosity for how the internet works. What began with simple HTML/CSS has now evolved into building complex Full-Stack applications using PHP, MySQL, and React.</p>
+                    <p>My core philosophy is continuous learning. Currently, I am mastering Laravel and Next.js to complete my development stack. Beyond just coding, I have a deep-rooted interest in Cybersecurity, aiming to transition into Network Defense and Ethical Hacking in the future.</p>
+                    <div class="flex gap-4 pt-4">
+                        <div class="text-center p-4 bg-[#1e293b] rounded-xl flex-1">
+                            <h4 class="text-[#00d4ff] text-2xl font-bold">15+</h4>
+                            <p class="text-xs">Projects</p>
+                        </div>
+                        <div class="text-center p-4 bg-[#1e293b] rounded-xl flex-1">
+                            <h4 class="text-[#00d4ff] text-2xl font-bold">50+</h4>
+                            <p class="text-xs">Assignments</p>
+                        </div>
+                        <div class="text-center p-4 bg-[#1e293b] rounded-xl flex-1">
+                            <h4 class="text-[#00d4ff] text-2xl font-bold">BSIT</h4>
+                            <p class="text-xs">Education</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-6 bg-[#0f172a] border border-slate-800 rounded-2xl hover:border-[#00d4ff] transition">
+                        <i class="fas fa-code text-[#00d4ff] mb-4 text-2xl"></i>
+                        <h3 class="font-bold">Full-Stack</h3>
+                        <p class="text-sm text-slate-500">React, PHP, Laravel, Next.js</p>
+                    </div>
+                    <div class="p-6 bg-[#0f172a] border border-slate-800 rounded-2xl hover:border-[#00d4ff] transition">
+                        <i class="fas fa-database text-[#00d4ff] mb-4 text-2xl"></i>
+                        <h3 class="font-bold">Database</h3>
+                        <p class="text-sm text-slate-500">MySQL, PostgreSQL, XAMPP</p>
+                    </div>
+                    <div class="p-6 bg-[#0f172a] border border-slate-800 rounded-2xl hover:border-[#00d4ff] transition">
+                        <i class="fas fa-shield-halved text-[#00d4ff] mb-4 text-2xl"></i>
+                        <h3 class="font-bold">Security</h3>
+                        <p class="text-sm text-slate-500">Network Security, Pentesting</p>
+                    </div>
+                    <div class="p-6 bg-[#0f172a] border border-slate-800 rounded-2xl hover:border-[#00d4ff] transition">
+                        <i class="fas fa-layer-group text-[#00d4ff] mb-4 text-2xl"></i>
+                        <h3 class="font-bold">UI/UX</h3>
+                        <p class="text-sm text-slate-500">Tailwind CSS, Bootstrap</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-20 max-w-7xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Core <span class="text-[#00d4ff]">Projects</span></h2>
+            <p class="text-slate-400">Handcrafted applications showcasing my logic and design skills.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="project-card bg-[#1e293b] border border-slate-700 p-6 rounded-3xl transition duration-300">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-12 h-12 bg-[#00d4ff33] rounded-lg flex items-center justify-center text-[#00d4ff] text-xl">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">PHP</span>
+                        <span class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">SQL</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">Meezan Bank Simulation</h3>
+                <p class="text-sm text-slate-400 mb-6">A high-logic banking simulation featuring transaction management, user auth, and SQL synchronization.</p>
+                <a href="https://ukasha26.github.io/Meezan-Bank-App/" class="text-[#00d4ff] font-bold text-sm flex items-center gap-2 hover:underline">
+                    View Project <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="project-card bg-[#1e293b] border border-slate-700 p-6 rounded-3xl transition duration-300">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-12 h-12 bg-[#00d4ff33] rounded-lg flex items-center justify-center text-[#00d4ff] text-xl">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">React</span>
+                        <span class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">JS</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">Biryani Menu</h3>
+                <p class="text-sm text-slate-400 mb-6">Modern UI dashboard created with React hooks and complex state management logic.</p>
+                <a href="https://lively-starship-72f475.netlify.app" class="text-[#00d4ff] font-bold text-sm flex items-center gap-2 hover:underline">
+                    View Project <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+
+            <div class="project-card bg-[#1e293b] border border-slate-700 p-6 rounded-3xl transition duration-300">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="w-12 h-12 bg-[#00d4ff33] rounded-lg flex items-center justify-center text-[#00d4ff] text-xl">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">JS</span>
+                        <span class="text-[10px] bg-slate-800 px-2 py-1 rounded text-slate-400">HTML/CSS</span>
+                    </div>
+                </div>
+                <h3 class="text-xl font-bold mb-3 text-white">Foreign Exchange Dashboard</h3>
+                <p class="text-sm text-slate-400 mb-6">Multiple functional web tools focused on pure JavaScript manipulation and responsiveness.</p>
+                <a href="https://ukasha26.github.io/js-10/" class="text-[#00d4ff] font-bold text-sm flex items-center gap-2 hover:underline">
+                    View Project <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="assignments" class="py-20 bg-[#0a0f1d]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">50+ Academic <span class="text-[#00d4ff]">Assignments</span></h2>
+                    <p class="text-slate-500">From basic tags to complex algorithms - my journey in BSIT.</p>
+                </div>
+                <a href="https://github.com/repos?q=owner%3A%40me" class="bg-slate-800 px-6 py-2 rounded-lg text-sm border border-slate-700 hover:bg-slate-700 transition">View All in GitHub Repo</a>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="text-slate-400 border-b border-slate-800">
+                            <th class="py-4 px-4 font-medium">Category</th>
+                            <th class="py-4 px-4 font-medium">Modules / Topics</th>
+                            <th class="py-4 px-4 font-medium text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-slate-800/50 hover:bg-[#1e293b] transition">
+                            <td class="py-4 px-4"><span class="text-[#00d4ff] font-bold">Web Foundation</span></td>
+                            <td class="py-4 px-4 text-slate-500">30+ Tasks in HTML5, CSS3, Flexbox & Grid</td>
+                            <td class="py-4 px-4 text-right"><a href="https://ukasha26.github.io/The-third-gate/" class="text-slate-300 underline">Link</a></td>
+                        </tr>
+                        <tr class="border-b border-slate-800/50 hover:bg-[#1e293b] transition">
+                            <td class="py-4 px-4"><span class="text-[#00d4ff] font-bold">Frontend Frameworks</span></td>
+                            <td class="py-4 px-4 text-slate-500">10+ Assignments in Tailwind CSS & Bootstrap 5</td>
+                            <td class="py-4 px-4 text-right"><a href="https://ukasha26.github.io/daraz-seller-dashboard/" class="text-slate-300 underline">Link</a></td>
+                        </tr>
+                        <tr class="border-b border-slate-800/50 hover:bg-[#1e293b] transition">
+                            <td class="py-4 px-4"><span class="text-[#00d4ff] font-bold">Backend & DB</span></td>
+                            <td class="py-4 px-4 text-slate-500">PHP Forms, MySQL Integrations & SQL Queries</td>
+                            <td class="py-4 px-4 text-right"><a href="https://ukasha26.github.io/Meezan-Bank-App/" class="text-slate-300 underline">Link</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-12">Let's <span class="text-[#00d4ff]">Connect</span></h2>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=muhammadukasha2026@gmail.com" class="flex items-center gap-3 bg-[#1e293b] px-6 py-3 rounded-2xl border border-slate-700 hover:border-[#00d4ff] transition group">
+                <i class="fas fa-envelope text-[#00d4ff] group-hover:scale-110"></i> Email
+            </a>
+            <a href="https://www.linkedin.com/in/muhammad-ukasha-962397383" class="flex items-center gap-3 bg-[#1e293b] px-6 py-3 rounded-2xl border border-slate-700 hover:border-[#00d4ff] transition group">
+                <i class="fab fa-linkedin text-[#00d4ff] group-hover:scale-110"></i> LinkedIn
+            </a>
+            <a href="https://wa.me/03284595334" class="flex items-center gap-3 bg-[#1e293b] px-6 py-3 rounded-2xl border border-slate-700 hover:border-[#00d4ff] transition group">
+                <i class="fab fa-whatsapp text-[#00d4ff] group-hover:scale-110"></i> WhatsApp
+            </a>
+            <a href="https://github.com/ukasha26" class="flex items-center gap-3 bg-[#1e293b] px-6 py-3 rounded-2xl border border-slate-700 hover:border-[#00d4ff] transition group">
+                <i class="fab fa-github text-[#00d4ff] group-hover:scale-110"></i> GitHub
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-slate-600 text-xs border-top border-slate-800">
+        <p>© 2026 Muhammad Ukasha. Built with Passion & Caffeine.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth reveal on scroll using Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach((section) => {
+            section.classList.add('transition', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
